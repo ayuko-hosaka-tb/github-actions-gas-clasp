@@ -11,7 +11,7 @@ defaults:
 
 jobs:
   deploy:
-    runs-on: winsows-latest
+    runs-on: windows-latest
     timeout-minutes: 15
 
     steps:
