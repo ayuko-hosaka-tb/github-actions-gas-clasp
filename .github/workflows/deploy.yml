@@ -1,0 +1,27 @@
+name: update GAS(Google Apps Script)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  access_token: ya29.a0AeDClZCucb89KJNcLPWpqRa77ewQtNAXTCYE_ODCMHbuP7e1Q6b6Bncmd7IUCrVuDx74KVykSfO3J_sD42-me7yzi7zf_j0jr59k80kdf7KQJEfiRczy-qzTwgHAWC3K0D8IG99j8R0LR3BzJdfNCplHJGXUGSibhXjlfavVaCgYKAT4SARASFQHGX2Mi5l6lz7sYn3qLLmWyYgTL-A0175
+  refresh_token: 1//0eU65pmLvrdI8CgYIARAAGA4SNwF-L9IrxSCu53TGtjRtID99BgXG4dsOtfuMa0FLz4Rs1AyNaP0yrXlcLz2bITYlJ3ajGIsIZuQ
+  id_token: eyJhbGciOiJSUzI1NiIsImtpZCI6IjJjOGEyMGFmN2ZjOThmOTdmNDRiMTQyYjRkNWQwODg0ZWIwOTM3YzQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIxMDcyOTQ0OTA1NDk5LXZtMnYyaTVkdm4wYTBkMm80Y2EzNmkxdmdlOGN2Ym4wLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiMTA3Mjk0NDkwNTQ5OS12bTJ2Mmk1ZHZuMGEwZDJvNGNhMzZpMXZnZThjdmJuMC5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjExMDA2MTU2MDgyMTcwNDc1MDgwNiIsImhkIjoidHJ1c3RiYW5rLmNvLmpwIiwiZW1haWwiOiJheXVrb19ob3Nha2FAdHJ1c3RiYW5rLmNvLmpwIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF0X2hhc2giOiJRQ3JLVldHQmlJZHRoTnk4VDhyWTNnIiwibmFtZSI6IuepguWdguOBguOChuWtkCIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NKUkp5YnJzenBBZ2h2aDlNQ1dyMGVWREVyWElETUp6VkdrVmp1Yk9xd2ZJbXVuRVE9czk2LWMiLCJnaXZlbl9uYW1lIjoi44GC44KG5a2QIiwiZmFtaWx5X25hbWUiOiLnqYLlnYIiLCJpYXQiOjE3MzMzODAwMTEsImV4cCI6MTczMzM4MzYxMX0.G6I2xSGho1oFxGggtQb8T_taZHQq0LBrSigwgrkHI27nwkeT8-Y_kc8prwStKrpOC9xcUj82rAB8b2VGhj0l5-pwMFSpyX6BTR3vcZhhuVd52GqAefFlcr2A2DdYXnkfoys_kYeJ2q0aWm7VSVaIFunJdJt_D79IPzkupFzoz5ys8JFscg0ggU7GkObQ0AxBPseqI7tLY3DWmV_nZeARyagV1Xjw-po5KRToC8F-pnYSYjPDcA0tIGYinTVDcKlxLShXMFI8KW2hvu8Yd2b__FM_Aw4CcHPsLci-Ie99Hl1ZYWM6qNRQnpB339FadHldsyn7QWHjgCwSc3VZGE9NjQ
+  clientId: 1072944905499-vm2v2i5dvn0a0d2o4ca36i1vge8cvbn0.apps.googleusercontent.com
+  clientSecret: v6V3fKV_zWU7iw1DrpO1rknX
+
+jobs:
+  deploy:
+    runs-on: winsows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "16.x"
+      - run: npm ci
+      - run: echo \{\"token\":\{\"access_token\":\"${{ env.access_token}}\",\"scope\":\"https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/script.projects https://www.googleapis.com/auth/script.webapp.deploy https://www.googleapis.com/auth/logging.read openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/script.deployments https://www.googleapis.com/auth/service.management https://www.googleapis.com/auth/cloud-platform\",\"token_type\":\"Bearer\",\"id_token\":\"${{ env.id_token }}\",\"expiry_date\":1620870307822,\"refresh_token\":\"${{ env.refresh_token }}\"\},\"oauth2ClientSettings\":\{\"clientId\":\"${{ env.clientId }}\",\"clientSecret\":\"${{ env.clientSecret }}\",\"redirectUri\":\"http://localhost\"\},\"isLocalCreds\":false\} > ~/.clasprc.json
+      - run: clasp push
