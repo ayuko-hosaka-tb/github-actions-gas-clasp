@@ -30,11 +30,5 @@ jobs:
       - run: npm install clasp --save-dev
       - run: bash ..\deployment\setup.sh
       - run: bash ..\deployment\setup_claspjson.sh
-      - run: |
-          cd ..
-          cd src
-          clasp push --force
-      - run: |
-          cd ..
-          cd src
-          clasp deploy --deploymentId ${{env.DEPLOYMENT_ID}}
+      - run: clasp push --force
+      - run: clasp deploy --deploymentId ${{env.DEPLOYMENT_ID}}
