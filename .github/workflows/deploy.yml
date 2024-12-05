@@ -33,7 +33,7 @@ jobs:
       - run: |
           cd ..
           cd src
-          clasp push --forc
+          clasp push --force
       - run: |
           cd ..
           cd src
