@@ -27,8 +27,8 @@ jobs:
         with:
           node-version: "22.x"
       - run: npm ci
-      - run: bash .\deployment\setup.sh
-      - run: bash .\deployment\setup_claspjson.sh
+      - run: bash ..\deployment\setup.sh
+      - run: bash ..\deployment\setup_claspjson.sh
       - run: |
           cd src
           clasp push --forc
