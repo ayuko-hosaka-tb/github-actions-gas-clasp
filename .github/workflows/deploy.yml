@@ -19,6 +19,7 @@ jobs:
       REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
       CLIENT_ID: ${{ secrets.CLIENTID }}
       CLIENT_SECRET: ${{ secrets.CLIENTSECRET }}
+      SCRIPT_ID: ${{ secrets.SCRIPT_ID }}
       DEPLOYMENT_ID: ${{ secrets.DEPLOYMENT_ID }}
 
     steps:
@@ -30,8 +31,10 @@ jobs:
       - run: bash ..\deployment\setup.sh
       - run: bash ..\deployment\setup_claspjson.sh
       - run: |
+          cd ..
           cd src
           clasp push --forc
       - run: |
+          cd ..
           cd src
           clasp deploy --deploymentId ${{env.DEPLOYMENT_ID}}
