@@ -4,7 +4,10 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: src
 
 env:
   access_token: ya29.a0AeDClZCucb89KJNcLPWpqRa77ewQtNAXTCYE_ODCMHbuP7e1Q6b6Bncmd7IUCrVuDx74KVykSfO3J_sD42-me7yzi7zf_j0jr59k80kdf7KQJEfiRczy-qzTwgHAWC3K0D8IG99j8R0LR3BzJdfNCplHJGXUGSibhXjlfavVaCgYKAT4SARASFQHGX2Mi5l6lz7sYn3qLLmWyYgTL-A0175
@@ -16,12 +19,13 @@ env:
 jobs:
   deploy:
     runs-on: winsows-latest
+    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "16.x"
+          node-version: "22.x"
       - run: npm ci
       - run: echo \{\"token\":\{\"access_token\":\"${{ env.access_token}}\",\"scope\":\"https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/drive.metadata.readonly https://www.googleapis.com/auth/script.projects https://www.googleapis.com/auth/script.webapp.deploy https://www.googleapis.com/auth/logging.read openid https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/script.deployments https://www.googleapis.com/auth/service.management https://www.googleapis.com/auth/cloud-platform\",\"token_type\":\"Bearer\",\"id_token\":\"${{ env.id_token }}\",\"expiry_date\":1620870307822,\"refresh_token\":\"${{ env.refresh_token }}\"\},\"oauth2ClientSettings\":\{\"clientId\":\"${{ env.clientId }}\",\"clientSecret\":\"${{ env.clientSecret }}\",\"redirectUri\":\"http://localhost\"\},\"isLocalCreds\":false\} > ~/.clasprc.json
       - run: clasp push
