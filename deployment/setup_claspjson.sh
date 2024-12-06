@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 CLASPJSON=$(cat <<-END
     {

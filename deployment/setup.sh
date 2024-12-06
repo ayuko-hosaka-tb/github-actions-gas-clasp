@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 LOGIN=$(cat <<-END
     {
