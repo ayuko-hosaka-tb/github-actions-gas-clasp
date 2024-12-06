@@ -30,6 +30,9 @@ jobs:
       - run: npm install @google/clasp --save-dev
       - run: bash ..\deployment\setup.sh
       - run: bash ..\deployment\setup_claspjson.sh
-      - run: cd ..
+      - run: |
+          dir
+          cd ..
+          dir
       - run: clasp push
       - run: clasp deploy --deploymentId ${{env.DEPLOYMENT_ID}}
