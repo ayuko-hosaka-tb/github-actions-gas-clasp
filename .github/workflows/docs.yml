@@ -26,7 +26,7 @@ jobs:
   # Build job
   build:
     env:
-      tarfile: artifact.tar
+      tarfile: github-pages.tar
       outputDir: out
     runs-on: windows-latest
     steps:
