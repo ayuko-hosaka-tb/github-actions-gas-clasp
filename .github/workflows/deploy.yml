@@ -5,10 +5,6 @@ on:
     branches:
       - main
 
-defaults:
-  run:
-    working-directory: src
-
 jobs:
   deploy:
     runs-on: windows-latest
@@ -27,12 +23,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22.x"
-      - run: |
-          cd ..
-          npm install @google/clasp --save-dev
+      - run: npm install @google/clasp --save-dev
       - run: bash ..\deployment\setup.sh
       - run: bash ..\deployment\setup_claspjson.sh
-      - run: |
-          cd ..
-          clasp push
+      - run: clasp push
       - run: clasp deploy --deploymentId ${{env.DEPLOYMENT_ID}}
