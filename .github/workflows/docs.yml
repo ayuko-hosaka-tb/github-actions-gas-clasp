@@ -38,7 +38,7 @@ jobs:
       - run: npm ci
       - name: JSDoc build
         run: npm run doc
-      - run: tar -cvf ${{ env.tarfile }} $${{ env.outputDir }}
+      - run: tar -cvf ${{ env.tarfile }} ${{ env.outputDir }}
         shell: bash
       - name: Upload artifact
         id: deployment
