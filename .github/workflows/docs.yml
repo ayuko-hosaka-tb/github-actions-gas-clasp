@@ -26,7 +26,7 @@ jobs:
   # Build job
   build:
     env:
-      tarfile: github-pages.tar
+      artifact: github-pages.tar
       outputDir: out
     runs-on: windows-latest
     steps:
@@ -38,14 +38,14 @@ jobs:
       - run: npm ci
       - name: JSDoc build
         run: npm run doc
-      - run: tar -cvf ${{ env.tarfile }} ${{ env.outputDir }}
+      - run: tar -cvf ${{ env.artifact }} ${{ env.outputDir }}
         shell: bash
       - name: Upload artifact
         id: deployment
         uses: actions/upload-artifact@v4
         with:
-          path: ${{ env.tarfile }}
-      - run: rm ${{ env.tarfile }}
+          path: ${{ env.artifact }}
+      - run: rm ${{ env.artifact }}
         shell: "bash"
       - name: Setup Pages
         uses: actions/configure-pages@v5
