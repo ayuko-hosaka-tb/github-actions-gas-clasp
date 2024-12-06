@@ -33,10 +33,10 @@ jobs:
         with:
           node-version: "22.x"
       - run: npm ci
+      - name: JSDoc build
+        run: npm run doc
       - name: Setup Pages
         uses: actions/configure-pages@v5
-      - name: JSDoc build
-        run: jsdoc -r src
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         if: always()
