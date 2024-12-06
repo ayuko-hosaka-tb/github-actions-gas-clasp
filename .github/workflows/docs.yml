@@ -46,6 +46,7 @@ jobs:
         with:
           name: github-pages
           path: ${{ env.artifact }}
+          compression-level: 9
       - run: rm ${{ env.artifact }}
         shell: "bash"
       - name: Setup Pages
