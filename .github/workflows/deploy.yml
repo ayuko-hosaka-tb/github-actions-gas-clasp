@@ -3,7 +3,7 @@ name: update GAS(Google Apps Script)
 on:
   push:
     paths:
-      - src/**
+      - deployment/**
 
 jobs:
   deploy:
