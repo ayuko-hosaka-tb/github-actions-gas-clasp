@@ -25,6 +25,9 @@ concurrency:
 jobs:
   # Build job
   build:
+    env:
+      tarfile: artifact.tar
+      outputDir: out
     runs-on: windows-latest
     steps:
       - name: Checkout
@@ -35,13 +38,17 @@ jobs:
       - run: npm ci
       - name: JSDoc build
         run: npm run doc
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+      - run: tar -cvf ${{ env.tarfile }} $${{ env.outputDir }}
+        shell: bash
       - name: Upload artifact
+        id: deployment
         uses: actions/upload-artifact@v4
         with:
-          name: github-pages
-          path: out/**
+          path: ${{ env.tarfile }}
+      - run: rm ${{ env.tarfile }}
+        shell: "bash"
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
   # Deployment job
   deploy:
