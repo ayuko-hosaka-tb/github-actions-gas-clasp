@@ -32,7 +32,6 @@ jobs:
       - run: |
           dir
           clasp push --force
-          if:always()
           dir
       - run: |
           dir
