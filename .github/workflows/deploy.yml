@@ -28,14 +28,11 @@ jobs:
         with:
           node-version: "22.x"
       - run: |
-          dir
-          cd ..
-      - run: npm install @google/clasp --save-dev
+          cd src
+          npm install @google/clasp --save-dev
       - run: bash ..\deployment\setup.sh
       - run: bash ..\deployment\setup_claspjson.sh
       - run: |
-          dir
-          cd ..
-          dir
-      - run: clasp push
+          cd src
+          clasp push
       - run: clasp deploy --deploymentId ${{env.DEPLOYMENT_ID}}
