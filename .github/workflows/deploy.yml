@@ -23,12 +23,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22.x"
-      - run: npm install @google/clasp --save-dev
+      - run: |
+          dir
+          npm install @google/clasp --save-dev
+          dir
       - run: bash deployment\setup.sh
       - run: bash deployment\setup_claspjson.sh
       - run: |
-          cd src
+          dir
           clasp push --force
+          if:always()
+          dir
       - run: |
-          cd src
+          dir
           clasp deploy --deploymentId ${{env.DEPLOYMENT_ID}}
