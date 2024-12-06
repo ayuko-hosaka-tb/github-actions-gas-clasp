@@ -1,5 +1,5 @@
-# Sample workflow for building and deploying a Jekyll site to GitHub Pages
-name: Deploy Jekyll with GitHub Pages dependencies preinstalled
+# Sample workflow for building and deploying JSDoc site to GitHub Pages
+name: Deploy refelence documents with GitHub Pages
 
 on:
   # Runs on pushes targeting the default branch
@@ -46,10 +46,10 @@ jobs:
         with:
           name: github-pages
           path: ${{ env.artifact }}
-      - run: rm ${{ env.artifact }}
-        shell: "bash"
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - run: rm ${{ env.artifact }}
+        shell: "bash"
 
   # Deployment job
   deploy:
