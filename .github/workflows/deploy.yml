@@ -27,7 +27,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22.x"
-      - run: dir
+      - run: |
+          dir
+          cd ..
       - run: npm install @google/clasp --save-dev
       - run: bash ..\deployment\setup.sh
       - run: bash ..\deployment\setup_claspjson.sh
