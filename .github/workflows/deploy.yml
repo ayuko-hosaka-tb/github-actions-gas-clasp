@@ -2,8 +2,8 @@ name: update GAS(Google Apps Script)
 
 on:
   push:
-    branches:
-      - main
+    paths:
+      - src/sample.js
 
 jobs:
   deploy:
