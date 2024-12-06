@@ -26,6 +26,7 @@ jobs:
   # Build job
   build:
     env:
+      artifact: github-pages.tar
       outputDir: out
     runs-on: windows-latest
     steps:
@@ -38,14 +39,22 @@ jobs:
       - name: JSDoc build
         run: npm run doc
         shell: bash
+      - run: tar -cvf ${{ env.artifact }} ${{ env.outputDir }}
       - name: Upload artifact
         id: deployment
         uses: actions/upload-artifact@v4
         with:
           name: github-pages
           path: out/
+          compression-level: 9
+      - name: Output artifact ID
+        run: echo 'Artifact ID is ${{ steps.deployment.outputs.artifact-id }}'
+      - name: Output artifact URL
+        run: echo 'Artifact URL is ${{ steps.deployment.outputs.artifact-url }}'
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - run: rm ${{ env.artifact }}
+        shell: "bash"
 
   # Deployment job
   deploy:
@@ -58,3 +67,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - run: echo 'Pages Url is ${{ steps.deployment.outputs.page_url }}'
