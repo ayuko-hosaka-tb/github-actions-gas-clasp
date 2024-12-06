@@ -1,5 +1,9 @@
 {
   "devDependencies": {
-    "@google/clasp": "^2.4.2"
+    "@google/clasp": "^2.4.2",
+    "jsdoc": "^4.0.4"
+  },
+  "scripts": {
+    "doc": "jsdoc -r src"
   }
 }
