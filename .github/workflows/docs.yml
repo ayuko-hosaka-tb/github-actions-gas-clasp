@@ -26,8 +26,8 @@ jobs:
   # Build job
   build:
     env:
-      artifact: github-pages.tar
-      outputDir: out
+      artifact: artifact.tar
+      outputDir: out/
     runs-on: windows-latest
     steps:
       - name: Checkout
@@ -46,7 +46,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           name: github-pages
-          path: ${{ runner.temp }}/${{ env.artifact }}
+          path: ${{ env.artifact }}
       - run: rm ${{ env.artifact }}
         shell: "bash"
       - name: Setup Pages
