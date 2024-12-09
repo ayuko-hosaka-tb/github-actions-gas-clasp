@@ -38,14 +38,15 @@ jobs:
       - run: npm ci
       - name: JSDoc build
         run: npm run doc
-      - run: tar -cvf ${{ env.artifact }} ${{ env.outputDir }}
+      - name: Run tar -cvf
+        run: tar -cvf ${{ env.artifact }} ${{ env.outputDir }}
         shell: bash
-      - name: Upload artifact
+      - name: Upload static files as artifact
         id: deployment
         uses: actions/upload-pages-artifact@v3
         with:
           name: github-pages
-          path: ${{ env.artifact }}
+          path: ${{ runner.temp }}/${{ env.artifact }}
       - run: rm ${{ env.artifact }}
         shell: "bash"
       - name: Setup Pages
