@@ -42,11 +42,10 @@ jobs:
         shell: bash
       - name: Upload artifact
         id: deployment
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
           name: github-pages
           path: ${{ env.artifact }}
-          compression-level: 9
       - run: rm ${{ env.artifact }}
         shell: "bash"
       - name: Setup Pages
