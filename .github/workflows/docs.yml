@@ -62,8 +62,6 @@ jobs:
           name: github-pages
           path: ${{ runner.temp }}/${{ env.artifact }}
           if-no-files-found: error
-      - run: rm ${{ env.artifact }}
-        shell: "bash"
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
