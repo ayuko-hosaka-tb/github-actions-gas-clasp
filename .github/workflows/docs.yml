@@ -38,15 +38,30 @@ jobs:
       - run: npm ci
       - name: JSDoc build
         run: npm run doc
-      - name: Run tar -cvf
-        run: tar -cvf ${{ env.artifact }} ${{ env.outputDir }}
+      - name: Archive artifact
         shell: bash
-      - name: Upload static files as artifact
+        if: runner.os == 'Windows'
+        run: |
+          echo ::group::Archive artifact
+          tar \
+            --dereference --hard-dereference \
+            --directory "$INPUT_PATH" \
+            -cvf "$RUNNER_TEMP\artifact.tar" \
+            --exclude=.git \
+            --exclude=.github \
+            --exclude=".[^/]*" \
+            --force-local \
+            "."
+          echo ::endgroup::
+        env:
+          INPUT_PATH: ${{ env.outputDir }}
+      - name: upload-artifact
         id: deployment
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: github-pages
-          path: ${{ env.artifact }}
+          path: ${{ runner.temp }}/${{ env.artifact }}
+          if-no-files-found: error
       - run: rm ${{ env.artifact }}
         shell: "bash"
       - name: Setup Pages
