@@ -5,4 +5,6 @@ function consoleDescription() {
     console.log('GitHub Actions Deploy Automation!');
     console.log('Does it automate it?');
     console.log('Yes!!');
+
+    console.log('Clasp push!')
 }

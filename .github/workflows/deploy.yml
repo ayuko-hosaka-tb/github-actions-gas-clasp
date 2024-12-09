@@ -1,9 +1,11 @@
-name: update GAS(Google Apps Script)
+name: Update GAS(Google Apps Script)
 
 on:
   push:
     paths:
-      - deployment/**
+      - src/**
+
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -19,12 +21,19 @@ jobs:
       DEPLOYMENT_ID: ${{ secrets.DEPLOYMENT_ID }}
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Setup repository
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: "22.x"
-      - run: npm ci
-      - run: bash deployment\setup.sh
-      - run: bash deployment\setup_claspjson.sh
-      - run: clasp push --force
-      - run: clasp deploy --deploymentId ${{env.DEPLOYMENT_ID}}
+      - name: Install Clasp
+        run: npm ci
+      - name: Generate ~/.clasprc.json
+        run: bash deployment\setup.sh
+      - name: Generate ~/.clasp.json
+        run: bash deployment\setup_claspjson.sh
+      - name: Push
+        run: clasp push --force
+      - name: Deploy
+        run: clasp deploy --deploymentId ${{env.DEPLOYMENT_ID}}
