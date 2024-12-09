@@ -34,8 +34,6 @@ jobs:
       - name: Generate ~/.clasp.json
         run: bash deployment\setup_claspjson.sh
       - name: Push
-        run: |
-          SET NODE_PATH=% APPDATA%\npm
-          clasp -P src/ push
+        run: clasp --project src/ push
       - name: Deploy
         run: clasp deploy --deploymentId ${{env.DEPLOYMENT_ID}}
