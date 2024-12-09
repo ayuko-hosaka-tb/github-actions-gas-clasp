@@ -36,6 +36,7 @@ jobs:
       - name: Push
         run: |
           cd src
+          SET NODE_PATH=% APPDATA%\npm
           clasp push --force
       - name: Deploy
         run: |
