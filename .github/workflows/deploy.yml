@@ -28,18 +28,12 @@ jobs:
         with:
           node-version: "22.x"
       - name: Install Clasp
-        run: npm ci
+        run: npm install --save-dev @google/clasp
       - name: Generate ~/.clasprc.json
         run: bash deployment\setup.sh
       - name: Generate ~/.clasp.json
         run: bash deployment\setup_claspjson.sh
       - name: Push
-        run: |
-          cd src
-          dir
-          clasp push --force
+        run: clasp push --force
       - name: Deploy
-        run: |
-          cd src
-          dir
-          clasp deploy --deploymentId ${{env.DEPLOYMENT_ID}}
+        run: clasp deploy --deploymentId ${{env.DEPLOYMENT_ID}}

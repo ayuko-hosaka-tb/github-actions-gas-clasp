@@ -6,5 +6,5 @@ function consoleDescription() {
     console.log('Does it automate it?');
     console.log('Yes!!');
 
-    console.log('Clasp push!!')
+    console.log('Clasp push!!!')
 }
