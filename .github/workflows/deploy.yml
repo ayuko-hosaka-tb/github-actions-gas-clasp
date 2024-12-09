@@ -34,6 +34,12 @@ jobs:
       - name: Generate ~/.clasp.json
         run: bash deployment\setup_claspjson.sh
       - name: Push
-        run: clasp push --force
+        run: |
+          cd src
+          dir
+          clasp push --force
       - name: Deploy
-        run: clasp deploy --deploymentId ${{env.DEPLOYMENT_ID}}
+        run: |
+          cd src
+          dir
+          clasp deploy --deploymentId ${{env.DEPLOYMENT_ID}}
