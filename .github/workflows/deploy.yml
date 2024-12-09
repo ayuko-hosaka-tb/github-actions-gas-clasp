@@ -36,4 +36,4 @@ jobs:
       - name: Push
         run: clasp --project src/ push
       - name: Deploy
-        run: clasp deploy --deploymentId ${{env.DEPLOYMENT_ID}}
+        run: clasp --project src/ deploy --deploymentId ${{env.DEPLOYMENT_ID}}
